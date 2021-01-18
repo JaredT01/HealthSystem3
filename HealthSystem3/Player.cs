@@ -13,6 +13,7 @@ namespace HealthSystem3
         private int lives;
         public string name;
         public bool alive = true;
+        private string Equipment;
 
         public Player()
         {
@@ -21,6 +22,7 @@ namespace HealthSystem3
             shield = 100;
             lives = 3;
             alive = true;
+            Equipment = "Nothing";
 
         }
         public void TakeDamage(int damage)
@@ -44,7 +46,7 @@ namespace HealthSystem3
                     {
                         shield = shield - damage;
                     }
-                       
+
                 }
                 else
                 {
@@ -58,11 +60,11 @@ namespace HealthSystem3
                     {
                         health = health - damage;
                     }
-                
+
                 }
                 Console.WriteLine("--------------------------------");
-                Console.WriteLine(name + " took "+OriginalDamage+" points of damage!");
-                if(health < 0)
+                Console.WriteLine(name + " took " + OriginalDamage + " points of damage!");
+                if (health < 0)
                 {
                     health = 0;
                 }
@@ -81,15 +83,16 @@ namespace HealthSystem3
             Console.WriteLine("Health: " + health);
             Console.WriteLine("Shield: " + shield);
             Console.WriteLine("Lives: " + lives);
+            Console.WriteLine("Equipment: " + Equipment);
         }
         public void CheckPlayer()
         {
-            if(health <= 0)
+            if (health <= 0)
             {
                 if (lives > 0)
                 {
                     Console.WriteLine("--------------------------------");
-                    Console.WriteLine(name + " died. However, "+ name+" had another life. Lucky.");
+                    Console.WriteLine(name + " died. However, " + name + " had another life. Lucky.");
                     lives = lives - 1;
                     health = 100;
                     shield = 100;
@@ -109,29 +112,46 @@ namespace HealthSystem3
         }
         public void Heal(int heal)
         {
-            if (health + heal > 100)
+            if (heal > 0)
             {
+                if (health + heal > 100)
+                {
 
-            }
-            else
+                }
+                else
+                {
+                    health = health + heal;
+                    Console.WriteLine("--------------------------------");
+                    Console.WriteLine(name + " healed for " + heal + " health.");
+                    Console.ReadKey(true);
+                }
+            } else
             {
-                health = health + heal;
-                Console.WriteLine("--------------------------------");
-                Console.WriteLine(name + " healed for " + heal + " health.");
-                Console.ReadKey(true);
+                Console.WriteLine("You cannot heal negative numbers! Please increase to a positive integer");
+
             }
         }
         public void Regenerate(int regen)
         {
-            if (shield + regen > 100)
+            if (regen > 0)
+            {
+                if (shield + regen > 100)
             {
 
             }
             else
-            {shield = shield + regen;
+            {
+                shield = shield + regen;
                 Console.WriteLine("--------------------------------");
                 Console.WriteLine(name + " regenerated for " + regen + " shield points.");
                 Console.ReadKey(true);
+
+            }
+            }
+            else
+            {
+                Console.WriteLine("You cannot heal negative numbers! Please increase to a positive integer");
+
             }
         }
         public void Reset()
@@ -144,6 +164,88 @@ namespace HealthSystem3
             Program.debugDamage = 0;
             Program.debugHeal = 0;
         }
+        public void Equip()
+        {
+            for (int x = 0; x < 1;)
+            {
+                Console.WriteLine("--------------------------------");
+                Console.WriteLine("Do you wish to change your equipment? Y/N");
+                Console.WriteLine("--------------------------------");
+                string answer = Console.ReadLine();
+                if (answer == "y")
+                {
+                    for (int y = 0; y < 1;)
+                    {
+                        Console.WriteLine("--------------------------------");
+                        Console.WriteLine("Do you want to equip a: \n1) Sword\n2) Bow");
+                        Console.WriteLine("Please enter the number beside the option you want.");
+                        Console.WriteLine("--------------------------------");
+                        answer = Console.ReadLine();
+                        if (answer == "1")
+                        {
+                            Equipment = "Sword";
+                            y = 1;
+                            x = 1;
 
+                        }
+                        else if (answer == "2")
+                        {
+                            Equipment = "Bow";
+                            y = 1;
+                            x = 1;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                        }
+                    }
+
+                }
+                else if (answer == "Y")
+                {
+                    for (int y = 0; y < 1;)
+                    {
+                        Console.WriteLine("Do you want to equip a: \n1) Sword\n2) Shield");
+                        Console.WriteLine("Please enter the number beside the option you want.");
+                        answer = Console.ReadLine();
+                        if (answer == "1")
+                        {
+                            Equipment = "Sword";
+                            y = 1;
+                            x = 1;
+
+                        }
+                        else if (answer == "2")
+                        {
+                            Equipment = "Shield";
+                            y = 1;
+                            x = 1;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                        }
+                    }
+
+                }
+                else if (answer == "n")
+                {
+                    x = 1;
+                }
+                else if (answer == "N")
+                {
+                    x = 1;
+                }
+                else if (answer == "")
+                {
+                    x = 1;
+                }
+                else
+                {
+                    Console.Clear();
+                }
+            }
+
+        }
     }
 }

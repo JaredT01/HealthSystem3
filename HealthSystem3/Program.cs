@@ -51,32 +51,36 @@ namespace HealthSystem3
         }
         static void GameLoop()
         {
+            //Increases Damage and Heal to showcase the Health System
             debugDamage = debugDamage + 25;
             debugHeal = debugHeal + 5;
+
+            //Display Stats and handle equiping gear
             Console.Clear();
             user.ShowStats();
             Console.ReadKey(true);
+            user.Equip();
+            Console.Clear();
+
+            //Taking Damage
+            user.ShowStats();
             user.TakeDamage(debugDamage);
             Console.ReadKey(true);
             Console.Clear();
+
+            //Checking the player to see if they died from the TakeDamage()
             user.ShowStats();
             user.CheckPlayer();
+            
+            //Healing and Regenerating an alive player. Will be skipped if the player died
             if(user.alive == true) {
                 Console.Clear();
                 user.ShowStats();
                 user.Heal(debugHeal);
-
-
                 Console.Clear();
                 user.ShowStats();
                 user.Regenerate(debugHeal);
             }
-
-            
-           
-            
-
-
         }
     }
 }
