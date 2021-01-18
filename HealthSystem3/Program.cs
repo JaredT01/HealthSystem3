@@ -21,8 +21,29 @@ namespace HealthSystem3
                 }
                 else
                 {
-                    Console.ReadKey(true);
-                    x = 1;
+                    Console.WriteLine("Do you wish to run this again? Y/N");
+                    string answer = Console.ReadLine();
+                    if(answer == "y")
+                    {
+                        user.Reset();
+                    } else if (answer == "Y")
+                    {
+                        user.Reset();
+
+                    }
+                    else if (answer == "n")
+                    {
+                        x = 1;
+                    }
+                    else if (answer == "N")
+                    {
+                        x = 1;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                    }
+                    
                 }
 
             }
@@ -33,24 +54,26 @@ namespace HealthSystem3
             debugDamage = debugDamage + 25;
             debugHeal = debugHeal + 5;
             Console.Clear();
-            user.DisplayStats();
+            user.ShowStats();
             Console.ReadKey(true);
             user.TakeDamage(debugDamage);
             Console.ReadKey(true);
             Console.Clear();
-            user.DisplayStats();
+            user.ShowStats();
             user.CheckPlayer();
+            if(user.alive == true) {
+                Console.Clear();
+                user.ShowStats();
+                user.Heal(debugHeal);
 
 
-            Console.Clear();
-            user.DisplayStats();
-            user.Heal(debugHeal);
+                Console.Clear();
+                user.ShowStats();
+                user.Regenerate(debugHeal);
+            }
 
-
-            Console.Clear();
-            user.DisplayStats();
-            Console.ReadKey(true);
-            user.Regenerate(debugHeal);
+            
+           
             
 
 

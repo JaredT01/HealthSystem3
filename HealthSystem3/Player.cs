@@ -20,6 +20,7 @@ namespace HealthSystem3
             name = "You";
             shield = 100;
             lives = 3;
+            alive = true;
 
         }
         public void TakeDamage(int damage)
@@ -59,6 +60,7 @@ namespace HealthSystem3
                     }
                 
                 }
+                Console.WriteLine("--------------------------------");
                 Console.WriteLine(name + " took "+OriginalDamage+" points of damage!");
                 if(health < 0)
                 {
@@ -68,12 +70,14 @@ namespace HealthSystem3
             }
             else
             {
+                Console.WriteLine("--------------------------------");
                 Console.WriteLine("Damage is not a positive integer and therefore does not work.");
             }
 
         }
-        public void DisplayStats()
+        public void ShowStats()
         {
+            Console.WriteLine("--------------------------------");
             Console.WriteLine("Health: " + health);
             Console.WriteLine("Shield: " + shield);
             Console.WriteLine("Lives: " + lives);
@@ -84,6 +88,7 @@ namespace HealthSystem3
             {
                 if (lives > 0)
                 {
+                    Console.WriteLine("--------------------------------");
                     Console.WriteLine(name + " died. However, "+ name+" had another life. Lucky.");
                     lives = lives - 1;
                     health = 100;
@@ -94,6 +99,7 @@ namespace HealthSystem3
                 }
                 else
                 {
+                    Console.WriteLine("--------------------------------");
                     Console.WriteLine(name + " died... permenantly.");
                     alive = false;
                     Console.ReadKey(true);
@@ -101,7 +107,6 @@ namespace HealthSystem3
             }
 
         }
-
         public void Heal(int heal)
         {
             if (health + heal > 100)
@@ -111,11 +116,11 @@ namespace HealthSystem3
             else
             {
                 health = health + heal;
+                Console.WriteLine("--------------------------------");
                 Console.WriteLine(name + " healed for " + heal + " health.");
                 Console.ReadKey(true);
             }
         }
-
         public void Regenerate(int regen)
         {
             if (shield + regen > 100)
@@ -124,9 +129,20 @@ namespace HealthSystem3
             }
             else
             {shield = shield + regen;
+                Console.WriteLine("--------------------------------");
                 Console.WriteLine(name + " regenerated for " + regen + " shield points.");
                 Console.ReadKey(true);
             }
+        }
+        public void Reset()
+        {
+            health = 100;
+            name = "You";
+            shield = 100;
+            lives = 3;
+            alive = true;
+            Program.debugDamage = 0;
+            Program.debugHeal = 0;
         }
 
     }
